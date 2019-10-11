@@ -1,0 +1,25 @@
+##
+# Production Dockerfile
+#
+
+##
+# STAGE 1
+# build
+#
+FROM node:12.9.1-alpine as node
+WORKDIR /app
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+COPY . /app
+RUN yarn install --pure-lockfile
+
+RUN yarn react-scripts build
+
+
+##
+# STAGE 2
+# serve
+#
+FROM nginx:1.17.4-alpine as nginx
+COPY --from=node /app/build /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]

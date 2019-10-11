@@ -1,0 +1,15 @@
+##
+# Development Dockerfile
+#
+
+##
+# STAGE 1
+# build
+#
+FROM node:12.9.1-alpine as node
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+COPY . /app
+RUN yarn install --pure-lockfile
