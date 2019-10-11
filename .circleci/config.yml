@@ -2,6 +2,7 @@ version: 2
 jobs:
   test:
     docker:
+      # - image: circleci/classic
       - image: circleci/cci-demo-docker-primary:0.0.2
     steps:
       - checkout
@@ -16,6 +17,7 @@ jobs:
           name: Start container and verify it is working
           command: |
             set -x
+            # docker network create web_local
             docker-compose up dev
             docker-compose run --rm test
   deploy:
@@ -29,6 +31,7 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+
 workflows:
   version: 2
   setup_and_run:

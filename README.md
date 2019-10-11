@@ -1,5 +1,7 @@
 ## create-react-app-docker
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Motivation
 1) Create the environment needed for your build process
 2) Run that build process to produce your artifact
 3) Create your production environment
