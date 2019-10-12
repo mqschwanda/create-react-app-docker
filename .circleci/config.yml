@@ -2,7 +2,6 @@ version: 2
 jobs:
   test:
     docker:
-      # - image: circleci/classic
       - image: circleci/cci-demo-docker-primary:0.0.2
     steps:
       - checkout
@@ -14,10 +13,9 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
       - run:
-          name: Start container and verify it is working
+          name: Start container and run tests
           command: |
             set -x
-            # docker network create web_local
             docker-compose up dev
             docker-compose run --rm test
   deploy:
@@ -25,6 +23,8 @@ jobs:
       - image: buildpack-deps:trusty
     environment:
       HEROKU_APP: "create-react-app-docker"
+      # don't add heroku api key here, instead use circle ci dashboard
+      # HEROKU_API_KEY: ""
     steps:
       - checkout
       - run:
@@ -44,4 +44,4 @@ workflows:
                 - master
                 - /^deploy/
           requires:
-            - ci
+            - test

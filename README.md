@@ -1,4 +1,4 @@
-## create-react-app-docker
+# create-react-app-docker
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Motivation
@@ -22,14 +22,8 @@ git clone git@github.com:mqschwanda/create-react-app-docker.git
 cd create-react-app-docker
 ```
 
-### 3) Add Docker Network
-You only need do this once.
-```shell
-yarn docker-network-create
-```
-
-### 4) Start Docker
-The entire app runs on Docker. To build the Docker containers:
+### 3) Start Docker
+The entire app runs on Docker. To build and start the Docker containers:
 ```shell
 yarn start
 ```
@@ -73,6 +67,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Create React App in Docker
 [Create React App + Docker](https://medium.com/@shakyShane/lets-talk-about-docker-artifacts-27454560384f)
 
 [Dockerizing a React App](https://mherman.org/blog/dockerizing-a-react-app/)
@@ -100,5 +95,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-### Resources

@@ -10,6 +10,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
+    "eject": "yarn react-scripts eject",
     "react-scripts": "./node_modules/.bin/react-scripts",
     "start:prod": "docker-compose down && docker-compose up prod",
     "start": "docker-compose down && docker-compose up dev",

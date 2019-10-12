@@ -8,9 +8,8 @@
 #
 FROM node:12.9.1-alpine as node
 WORKDIR /app
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-COPY . /app
+COPY package.json package.json /app/
+# COPY . /app
 RUN yarn install --pure-lockfile
 
 RUN yarn react-scripts build
@@ -22,4 +21,3 @@ RUN yarn react-scripts build
 #
 FROM nginx:1.17.4-alpine as nginx
 COPY --from=node /app/build /usr/share/nginx/html
-CMD ["nginx", "-g", "daemon off;"]
