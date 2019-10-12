@@ -9,6 +9,6 @@
 FROM node:12.9.1-alpine as node
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json yarn.lock /app/
-# COPY . /app
+COPY . /app
+# COPY package.json yarn.lock /app/
 RUN yarn install --pure-lockfile
