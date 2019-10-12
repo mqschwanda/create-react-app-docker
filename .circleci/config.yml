@@ -16,8 +16,9 @@ jobs:
           name: Start container and run tests
           command: |
             set -x
-            docker-compose up dev
-            docker-compose run --rm test
+            docker-compose up test
+            docker-compose run -it --rm test
+            # docker run test
   deploy:
     docker:
       - image: buildpack-deps:trusty
