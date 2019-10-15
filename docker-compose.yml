@@ -6,9 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    # volumes:
-    #   - '.:/app'
-    #   - '/app/node_modules'
     ports:
       - '3000:3000'
     environment:
@@ -38,9 +35,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    # volumes:
-    #   - '.:/app'
-    #   - '/app/node_modules'
     environment:
       - NODE_ENV=testing
       - CHOKIDAR_USEPOLLING=true
