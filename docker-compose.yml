@@ -10,7 +10,14 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
+      - HTTPS=false
+      - HOST=0.0.0.0
+      - PORT=3000
+      # chokidar is used by webpack for watching changes
       - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
     networks:
       - web_local
     tty: true
@@ -24,6 +31,7 @@ services:
     ports:
       - '80:80'
     environment:
+      - SKIP_PREFLIGHT_CHECK=false
       - NODE_ENV=production
     networks:
       - web_local
@@ -35,9 +43,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
     environment:
       - NODE_ENV=testing
-      - CHOKIDAR_USEPOLLING=true
+      # force jest to run once instead of launching the watcher
       - CI=true
     networks:
       - web_local
