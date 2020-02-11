@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  dev:
+    container_name: dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - HTTPS=false
+      - HOST=0.0.0.0
+      - PORT=3000
+      # chokidar is used by webpack for watching changes
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    networks:
+      - web_local
+    tty: true
+    command: yarn react-scripts start
+
+  prod:
+    container_name: prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '80:80'
+    environment:
+      - SKIP_PREFLIGHT_CHECK=false
+      - NODE_ENV=production
+    networks:
+      - web_local
+    tty: true
+    command: ["nginx", "-g", "daemon off;"]
+
+  test:
+    container_name: test
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    environment:
+      - NODE_ENV=testing
+      # force jest to run once instead of launching the watcher
+      - CI=true
+    networks:
+      - web_local
+    tty: true
+    command: yarn react-scripts test
+
+networks:
+  web_local:
+    external: false

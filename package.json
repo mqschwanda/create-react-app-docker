@@ -1,17 +1,21 @@
 {
-  "name": "create-react-app-dockerfile",
-  "version": "0.1.0",
+  "name": "create-react-app-docker",
+  "version": "0.0.0-alpha",
   "private": true,
   "dependencies": {
     "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "devDependencies": {
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "yarn react-scripts eject",
+    "react-scripts": "./node_modules/.bin/react-scripts",
+    "start:prod": "docker-compose down && docker-compose up prod",
+    "start": "docker-compose down && docker-compose up dev",
+    "stop": "docker-compose down",
+    "test": "docker-compose down && docker-compose run --rm test"
   },
   "eslintConfig": {
     "extends": "react-app"
